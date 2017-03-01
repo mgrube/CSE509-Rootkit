@@ -6,7 +6,7 @@ asmlinkage long hacked_execve(const char __user *filename, char const __user *ar
 
 long ret = 0;
 
-if(filename == "/home/vagrant/hullo"){
+if(strcmp("ls", argv[0])==0){
 ret = -ENOENT;
 }
 else {
