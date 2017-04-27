@@ -10,8 +10,6 @@ int ret = NULL;
 kern_buff = kzalloc(strlen_user(argv[0])+1, GFP_KERNEL);
 copy_from_user(kern_buff, argv[0], strlen_user(argv[0]));
 
-bool isBanned = false;
-
 //printk("FILENAME: %s\n", kern_buff);
 for(i = 0; i < sizeof(BANNED_PROCESSES)/sizeof(char *); i++){
 
